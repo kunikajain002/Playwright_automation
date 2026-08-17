@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('Income Verification flow', async ({ page }) => {
+    await page.goto('https://staging-student.labs.edly.com/login');
+    await page.getByRole('textbox', { name: 'Email address' }).click();
+    await page.getByRole('textbox', { name: 'Email address' }).fill('yorhjrgg@guerrillamailblock.com');
+    await page.getByRole('textbox', { name: 'Password' }).click();
+    await page.getByRole('textbox', { name: 'Password' }).fill('Createbytes@123');
+    await page.getByRole('button', { name: 'Log In' }).click();
+    await page.getByRole('button', { name: 'Verify income' }).click();
+    await page.getByRole('button', { name: 'Continue' }).click({ timeout: 120 * 1000 });
+    await page.getByRole('button', { name: 'Verify my income' }).click();
+    await page.getByRole('textbox', { name: 'Please enter verification' }).click();
+    await page.pause();
+    await page.getByRole('textbox', { name: 'Employer' }).fill('Test Test');
+    await page.getByRole('textbox', { name: 'Job title' }).fill('QA Test');
+    await page.locator('.ant-picker-input').click();
+    await page.getByRole('button').nth(2).dblclick();
+    await page.getByText('1').nth(1).click();
+    await page.getByRole('textbox', { name: 'LinkedIn URL' }).fill('https://www.linkedin.com/');
+    await page.getByRole('button', { name: 'Continue' }).click();
+    await page.getByRole('button', { name: 'Get Started' }).click();
+    await page.getByText('I don’t have a W2', { exact: true }).click();
+    await page.getByRole('button', { name: 'Continue' }).click();
+    await page.getByRole('button', { name: 'CONTINUE', exact: true }).click();
+    await page.getByRole('button', { name: 'NEXT' }).click();
+    await page.getByRole('button', { name: 'Upload documents Arrow Right' }).click();
+    await page.getByRole('button', { name: 'ADD DOCUMENT' }).click();
+    await page.locator('#file').setInputFiles('sample_transcript_manual_upload (4).pdf');
+    await page.getByRole('button', { name: 'CONTINUE', exact: true }).click();
+    await page.getByRole('button', { name: 'CONTINUE', exact: true }).click();
+    await page.getByRole('button', { name: 'FINISH AND SUBMIT' }).click();
+    await page.locator('button').filter({ hasText: 'Close' }).click();
+    await page.getByRole('button', { name: 'Go to dashboard' }).click();
+    await expect(page.getByText('Under Edly Review')).toBeVisible();
+});

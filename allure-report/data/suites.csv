@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","14301","@Web Practice Playwright Test","","2026-08-09","failed","2026-08-09","","WebApiPart2.spec.js","",""
+"","12368","@Web Client App Login","","2026-08-09","passed","2026-08-09","","ClientAppPO.spec.js","",""
+"","11749","@Web Popup validation","","2026-08-09","passed","2026-08-09","","MoreValidation.spec.js","",""
+"","7765","@Web Screenshots & Visual Comparision","","2026-08-09","passed","2026-08-09","","MoreValidation.spec.js","",""

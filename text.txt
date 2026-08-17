@@ -1,0 +1,140 @@
+we use playwright.config.js to confirm the browser (which browser playwright should use)
+https://rahulshettyacademy.com/practice
+
+when starting fresh project the playwright package will automatically give you the playwright.config.js file with autofill,
+here we have "testDir: './tests'," from this we can run our files from tests folders 
+we are not specifically running one file we run playwirght.config.js to run a test
+if we have to run one file then testDir: './tests/<file_name>',
+
+Assertion: It is a check point / a verification point that checks if the actual state matches the expected state
+
+Playwright uses the headless mode by default (browser opening will not show) || cmd: npx playwright test
+we have to explicitly tell playwright to use head mode || cmd: npx playwirght test --headed
+To run the screenshot and video fro the test || cmd: npx playwright test --ui
+
+if we have multiple files in tests folder it will run parallelly but (default worker should run is 5, you may adjust this with the config file)
+if we have in one file it will run sequencially by default (but we can make this parallel too with -
+file headers : test.describe.configure({mode:'parallel'});)
+test.describe.configure({mode:'serial'}); 
+we can use this too, because the file will run serial by default but when 1 fails another will execute, but by putting the serial mode, when 1 test fails it will not call another test
+
+CSS selector 
+
+if ID is present 
+css => tagname#id or #id
+
+if class is present
+css => tagname.class or .class
+
+write css based on any Attribute
+css => [attribute=>'value'] || tagname[attribute=>'value']
+
+write css with traversing from parent to child
+css => parenttagname >> childtagname
+
+if needs to write the locator based on text
+text=<text>
+
+we can store a whole location in a const
+const submitButton = page.locator("[type='submit']");
+await submitButton.click();
+
+here .textContent() have the waiting ability to wait for a certain time
+but .allTextContent() does not wait for a certain time and thats where it will give empty array
+
+.pressSequentially() enter words one by one 
+
+Wait timeout:
+1. global level - in playwirght.config.js file
+2. test level - in test 
+3. step level - in steps ex: click({timeout:10*1000})
+
+types of timeout:
+1. expect (assertion) - expect.configure({timeout:9000})
+2. test level = test.setTimeout(6000);
+3. step level = click({timeout:10*1000})
+4. action timeout = for action attributes
+5. navigation timeout = for goto attributes
+
+writting test in debug mode - (to get xpaths and debugging)
+npx playwright test UIAttribute.spec.js --debug
+
+Codegen tool to record & Playback with generated automation script - 
+npx playwright codegen <URL_here>
+
+.goBack(); // its a browser back click
+.goForward(); // its a browser forward click
+
+there is another way to debug the code from Visual studio 
+from the package.json file, write the cmd in script { test: 'npx playwright test tests/WebApiPart1.spec.js'}
+then mark any stop point and press ctrl+shift+p and write debug npm script to debug slowly
+this will help when you are making api call
+
+also, we can make "trace: on" from playwright.config.js file, to get the trace file for the api call
+we can see the trace file from "trace.playwright.dev" site
+
+Intercepting Network calls - when we need to have ex: no order screen but we have lots of orders then playwright can mock the network interception for that perticular browser session.
+mocking the network calls
+
+API handler
+https://api.eventhub.rahulshettyacademy.com/api/docs/
+
+ExcelJS - to use excel file, edit update and reupload with playwright
+download ExcelJS
+- create new folder
+- open terminal in that folder
+- write cmd - npm init
+- then write cmd - npm install exceljs --savedev
+
+To give the knownlege for error
+from --ui on error tab click on Copy Prompt button, 
+to get the full propmt with all explanation
+
+we can have different config file, 
+like playwright.config1.js and CMD : --config playwirght.config1.js
+we can create projects in playwirght.config.js file and can call with CMD : --project=<name>;
+NO SPACES
+if you don't tell explicitly in cmds then it runs in both the configurations
+
+if we have same login in 2 files we can have test.skip(=>{}) because it can give race condition
+
+we can give a tag the title with @Web and run cmd : --grep '@Web'
+
+Allure Reporting -https://www.npmjs.com/package/allure-playwright
+Install = npm install -D allure-playwright
+generate results = npx playwright test --grep '@Web' --reporter=line,allure-playwright
+generate clean report = allure generate ./allure-results --clean 
+Open Generated reports = allure open ./allure-report
+
+we can add script to package.json
+"scripts": {
+    "regression" : "npx playwright test",
+    "webTests" : "npx playwright test --grep '@Web'",
+    "APITests" : "npx playwright test --grep '@API'",
+    "SafariNewConfig" : "npx playwright test --config playwright.config1.js --project=safari" 
+  },
+From this you don;t have to run this "npx playwright test tests/Upload-Download.spec.js"
+Instead
+npm run webTests
+
+C:\PlayWright_automation
+
+download typescript with cmd and read demo.ts file
+
+download cucumber framework to run the code with simple english
+read .feature files
+run cucumber with cmd : npx cucumber-js
+run cmd to exit from after the completion = npx cucumber-js --exit (this will run all the feature files)
+run cmd for single file : npx cucumber-js features/ErrorValidations.feature --exit
+cucumber can also have beforeAll and beforeEach
+https://github.com/cucumber/cucumber-js
+Tag cmd: npx cucumber-js --tags "@Regression" --exit
+For Parameretization - we need to add scenario Outline
+We cannot run files parallel but you can run 1 file in that we can run different scenario
+cmd : npx cucumber-js features/Ecommerce.feature --parallel 2 --exit (here 2 is the parallel no. we runs)
+html report cmd: npx cucumber-js features/Ecommerce.feature --parallel 2 --exit --format html:cucumber-report.html
+we can change the .html to .json to have the report 
+it will show the whole report, copy the file and past it on browser
+Retry : 
+
+Playwright Moka (search)
