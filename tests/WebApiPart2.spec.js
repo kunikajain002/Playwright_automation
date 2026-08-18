@@ -119,3 +119,5 @@ test('@Web title printing', async ()=>
     await page.goto("https://rahulshettyacademy.com/client");
     console.log(await page.title());
 })
+
+// webapi part 2
