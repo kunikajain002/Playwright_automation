@@ -137,4 +137,9 @@ we can change the .html to .json to have the report
 it will show the whole report, copy the file and past it on browser
 Retry : 
 
+
+git creating branch:
+git checkout -b <branch_name>
+
+
 Playwright Moka (search)
